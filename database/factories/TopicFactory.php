@@ -12,6 +12,5 @@ $factory->define(Topic::class, function (Faker $faker) {
         'title'   => $faker->sentence,
         'content' => $faker->paragraph,
         'user_id' => factory('App\User')->create()
-
     ];
 });
