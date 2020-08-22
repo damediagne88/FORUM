@@ -15,4 +15,11 @@ class Topic extends Model
 
         return $this->belongsTo('App\User');
     }
+
+    public function comments(){
+
+        return $this->morphMany('App\comment','commentable')->latest();
+    }
+
+
 }
