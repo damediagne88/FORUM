@@ -82,7 +82,7 @@ class TopicController extends Controller
      */
     public function edit(Topic $topic)
     {
-        //
+        return view('topics.edit',compact('topic'));
     }
 
     /**
@@ -94,7 +94,22 @@ class TopicController extends Controller
      */
     public function update(Request $request, Topic $topic)
     {
-        //
+
+        request()->validate([
+
+            'title' => ['required'],
+            'content' =>['required','min:10']
+        ]);
+
+        $topic->update([
+            'title' => request('title'),
+            'content' => request('content'),
+            'user_id' =>auth()->user()->id
+        ]);
+
+        flash('TOPICS UPDATE ')->success();
+
+        return redirect()->route('topics.show',$topic);
     }
 
     /**
