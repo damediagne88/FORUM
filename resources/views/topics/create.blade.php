@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('extra_js')
+
+
+{!! NoCaptcha::renderJs() !!}
+
+
+@endsection
+
 @section('content')
 <div class="container">
 <div class="row">
@@ -32,14 +40,30 @@
         @endif
       </div>
     </div>
-    
+    <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+        {!! NoCaptcha::display() !!}
+
+        @if ($errors->has('g-recaptcha-response'))
+        <span class="help-block">
+            <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+        </span>
+      @endif
+      </div>
+
+      
+    </div>
     <div class="form-group">
       <div class="col-lg-10 col-lg-offset-2">
         <button type="reset" class="btn btn-default">CANCEL</button>
         <button type="submit" class="btn btn-primary">CREATE</button>
       </div>
     </div>
+
+
   </fieldset>
+
+  
 </form>
 </div>
 </div>

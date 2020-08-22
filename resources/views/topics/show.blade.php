@@ -21,10 +21,21 @@
 
 
 </div>
-
+@can('update',$topic)
 <div class="container">
 <a href="{{ route('topics.edit',$topic)}}"><span class="label label-success">EDITER</span></a>
 </div>
 
+@endcan
+
+@can('delete',$topic)
+<div class="container center-block">
+<form method="post" action="{{ route('topics.destroy',$topic) }}">
+@csrf
+@method('DELETE')
+<button type="submit" class="btn btn-primary">DELETE</button>
+</form>
+</div>
+@endcan
 
 @endsection

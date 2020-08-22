@@ -47,7 +47,8 @@ class TopicController extends Controller
         request()->validate([
 
             'title' => ['required'],
-            'content' =>['required','min:10']
+            'content' =>['required','min:10'],
+            'g-recaptcha-response' => ['required','captcha']
         ]);
 
         Topic::create([
@@ -82,6 +83,8 @@ class TopicController extends Controller
      */
     public function edit(Topic $topic)
     {
+        $this->authorize('update',$topic);
+
         return view('topics.edit',compact('topic'));
     }
 
@@ -94,11 +97,12 @@ class TopicController extends Controller
      */
     public function update(Request $request, Topic $topic)
     {
+        $this->authorize('update',$topic);
 
         request()->validate([
 
             'title' => ['required'],
-            'content' =>['required','min:10']
+            'content' =>['required','min:10'],
         ]);
 
         $topic->update([
@@ -120,6 +124,11 @@ class TopicController extends Controller
      */
     public function destroy(Topic $topic)
     {
-        //
+        $this->authorize('delete',$topic);
+        $topic->delete();
+
+        flash('TOPICS DELETE ')->success();
+
+       return redirect('/');
     }
 }

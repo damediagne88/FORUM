@@ -12,7 +12,8 @@
 
     <link href="https://bootswatch.com/3/paper/bootstrap.min.css" rel="stylesheet">
     <link href="https://bootswatch.com/3/paper/bootstrap.css" rel="stylesheet">
-    
+
+    @yield('extra_js')
 </head>
 <body>
 
