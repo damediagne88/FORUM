@@ -4,9 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Topic;
 use Illuminate\Http\Request;
+use App\User;
 
 class TopicController extends Controller
 {
+
+    public function __construct(){
+
+        $this->middleware('auth')->except(['index','show']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +32,8 @@ class TopicController extends Controller
      */
     public function create()
     {
-        //
+
+        return view('topics.create');
     }
 
     /**
@@ -37,7 +44,23 @@ class TopicController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        request()->validate([
+
+            'title' => ['required'],
+            'content' =>['required','min:10']
+        ]);
+
+        Topic::create([
+            'title' => request('title'),
+            'content' => request('content'),
+            'user_id' =>auth()->user()->id
+        ]);
+
+        flash('TOPICS CREATE ')->success();
+
+        return back();
+
+
     }
 
     /**

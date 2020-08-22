@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Topic extends Model
 {
     protected $fillable = [
-        'title', 'conetnt', 'user_id',
+        'title', 'content', 'user_id',
     ];
 
     public function user(){
