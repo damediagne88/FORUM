@@ -15,6 +15,8 @@ Route::get('/','TopicController@index')->name('topics.index');
 
 Route::resource('topics','TopicController')->except(['index']);
 
+Route::post('/comment/{topic}','CommentController@store')->name('comments.store');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

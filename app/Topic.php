@@ -16,6 +16,8 @@ class Topic extends Model
         return $this->belongsTo('App\User');
     }
 
+    // ICI NOUS AVONS LE MODEL PARENT 
+
     public function comments(){
 
         return $this->morphMany('App\comment','commentable')->latest();
