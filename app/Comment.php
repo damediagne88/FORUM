@@ -14,6 +14,12 @@ class Comment extends Model
 
         return $this->morphTo();
     }
+// Un commentaire peux avoir plusieurs reponse 
+
+public function comments(){
+
+    return $this->morphMany('App\Comment','commentable')->latest();
+}
 
 
     public function user(){
